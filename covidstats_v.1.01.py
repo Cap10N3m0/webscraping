@@ -7,7 +7,7 @@ print("\033[1m"+"\t\tCOVID-19 Pandemic Country Check"+"\033[0m")
 try:
     html = urlopen(page)
 except:
-    print("\033[1m"+'\tSorry The Program Has Crashed'+"/033[0m")
+    print("\033[1m"+'\t\tSorry The Program Has Crashed'+"\033[0m")
     exit()
 soup = BeautifulSoup(html.read(),'lxml')
 
