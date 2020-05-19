@@ -7,10 +7,11 @@ print("\033[1m"+"\t\tCOVID-19 Pandemic Country Check"+"\033[0m")
 try:
     html = urlopen(page)
 except:
-    print("\033[1m"+'\t\tSorry The Program Has Crashed'+"\033[0m")
+    print("\033[1m"+'\t\tSorry The Program Has Crashed'+"/033[0m")
     exit()
 soup = BeautifulSoup(html.read(),'lxml')
 
+flag=0
 tbody = soup.select('#thetable')
 tr = tbody[0].select('tr')
 
@@ -32,10 +33,11 @@ for i in range(len(headers)):
         print("Number of Cases: ",cases[i])
         print("Number of Deaths: ",deaths[i])
         print("Number of Recovered Patients: ",recv[i])
+        flag=1
         if(cases[i] != None and recv[i] != None and deaths[i] != None):
-            plt.pie([cases[i],deaths[i],recv[i]],labels=["Active Cases","Deaths","Recovered"],autopct ='%1.1f%%',color=
-                   ['blue','red','green'])
-            plt.title('Covid-19 ',ctry,' Stats')
+            plt.pie([float(cases[i].replace(',','')),float(deaths[i].replace(',','')),float(recv[i].replace(',',''))],
+                    labels=["Active Cases","Deaths","Recovered"],autopct ='%1.1f%%',colors=['blue','red','green'])
             plt.show()
-else:
+        
+if flag==0:
     print(ctry," Not found")
